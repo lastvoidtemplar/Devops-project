@@ -22,10 +22,16 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set lowercase Repo ENV
+        run: |
+          echo "REPO_LC=${REPO,,}" >>${GITHUB_ENV}
+        env:
+          REPO: '${{ github.repository}}'
       
       - name: Build Docker Image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}/goapp:latest .
+          docker build -t ghcr.io/${{ REPO_LC }}/goapp:latest .
       
       - name: Push Docker Image
         run: |
