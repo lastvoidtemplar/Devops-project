@@ -8,7 +8,7 @@ import (
 )
 
 const HelloWorld = "Hello World"
-const Port = 3000
+const Port = 80
 
 func HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(HelloWorld))
