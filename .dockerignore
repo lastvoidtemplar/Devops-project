@@ -1,6 +1,13 @@
-.git
+.git/
 .gitignore
-.github
+.github/
+
+terraform/
 
 LICENSE
 README.md
+
+hosts
+
+KEYS.md
+
