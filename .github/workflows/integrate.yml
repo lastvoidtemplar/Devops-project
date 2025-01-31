@@ -1,0 +1,43 @@
+name: Build and Push Go app
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      
+      - name: Login to Docker Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set lowercase Repo ENV
+        run: |
+          echo "REPO_LC=${REPO,,}" >>${GITHUB_ENV}
+        env:
+          REPO: '${{ github.repository}}'
+      
+      - name: Build Docker Image
+        run: |
+          docker build -t ghcr.io/${{ env.REPO_LC }}/goapp:latest .
+      
+      - name: Push Docker Image
+        run: |
+          docker push ghcr.io/${{ env.REPO_LC }}/goapp:latest
