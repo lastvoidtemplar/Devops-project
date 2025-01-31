@@ -35,4 +35,4 @@ jobs:
       
       - name: Push Docker Image
         run: |
-          docker push ghcr.io/${{ github.repository }}/goapp:latest
+          docker push ghcr.io/${{ env.REPO_LC }}/goapp:latest
