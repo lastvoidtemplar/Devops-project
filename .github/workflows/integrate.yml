@@ -31,7 +31,7 @@ jobs:
       
       - name: Build Docker Image
         run: |
-          docker build -t ghcr.io/${{ REPO_LC }}/goapp:latest .
+          docker build -t ghcr.io/${{ env.REPO_LC }}/goapp:latest .
       
       - name: Push Docker Image
         run: |
