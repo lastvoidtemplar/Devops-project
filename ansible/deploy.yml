@@ -1,0 +1,55 @@
+- name: Deploy Go app
+  hosts: tag_Role_webserver
+  remote_user: ubuntu
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Install dependencies
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+
+    - name: Ensure Docker is installed
+      command: docker --version
+      register: docker_installed
+      changed_when: false
+
+    - name: Pull Docker image
+      docker_image:
+        name: ghcr.io/lastvoidtemplar/devops-project/goapp:latest
+        source: pull
+
+    - name: Stop existing Docker container
+      docker_container:
+        name: goapp
+        state: absent
+
+    - name: Run Docker container
+      docker_container:
+        name: goapp
+        image: ghcr.io/lastvoidtemplar/devops-project/goapp:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "80:80"

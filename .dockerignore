@@ -3,6 +3,7 @@
 .github/
 
 terraform/
+ansible/
 
 LICENSE
 README.md
