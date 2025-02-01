@@ -53,3 +53,5 @@
         restart_policy: always
         ports:
           - "80:80"
+        env:
+          HOSTNAME: "{{ ansible_hostname }}"
