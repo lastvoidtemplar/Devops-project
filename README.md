@@ -9,7 +9,7 @@ The app is a simple go app that is using the go standard library. It has two end
 
 ## Github Actions
 
-There is Github Actions workflow to build the Docker Image on a  pull request or a push to main.
+There is a Github Actions workflow that build the Docker Image on a  pull request or a push to main.
 
 ## OpenTofu
 
