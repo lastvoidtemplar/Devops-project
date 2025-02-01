@@ -1,7 +1,7 @@
 - name: Deploy Go app
   hosts: tag_Role_webserver
   remote_user: ubuntu
-  gather_facts: false
+  gather_facts: yes
   become: true
 
   tasks:
