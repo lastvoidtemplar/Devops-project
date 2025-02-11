@@ -77,6 +77,15 @@ pip3 install -r requirements.txt
 
 ### Run Ansible
 
+Setup your AWS credentials:
+
+```bash
+export AWS_ACCESS_KEY_ID="your AWS access key"
+export AWS_SECRET_ACCESS_KEY="your AWS secret key"
+```
+
+Run the Ansible Playbook
+
 ```bash
 ansible-playbook deploy.yml -i inventory/ --key-file ~/.ssh/id_rsa_tofu
 ```
